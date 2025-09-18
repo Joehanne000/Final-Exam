@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Car</title>
+    <style>
+        /* General Page */
+        body {
+            font-family: "Segoe UI", Roboto, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0d6efd;
+            color: white;
+            padding: 1rem 2rem;
+        }
+        .top-bar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: #0d6efd;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Grid Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Form Group */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #444;
+        }
+        input, select {
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #0d6efd;
+            outline: none;
+        }
+
+        /* Error Messages */
+        .error {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Actions */
+        .form-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5c636a;
+        }
+    </style>
+</head>
+<body>
+<header class="top-bar">
+    <h1>Add New Car</h1>
+    <div class="user-info">
+        <span th:text="'Hello, ' + ${#authentication.name}"></span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline">Logout</button>
+        </form>
+    </div>
+</header>
+
+<main class="form-container">
+    <form th:action="@{/save}" th:object="${car}" method="post">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="make">Make:</label>
+                <input id="make" type="text" th:field="*{make}" required>
+                <div class="error" th:if="${#fields.hasErrors('make')}" th:errors="*{make}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input id="year" type="number" th:field="*{year}" required>
+                <div class="error" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="licensePlateNumber">License Plate Number:</label>
+                <input id="licensePlateNumber" type="text" th:field="*{licensePlateNumber}" required>
+                <div class="error" th:if="${#fields.hasErrors('licensePlateNumber')}" th:errors="*{licensePlateNumber}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input id="color" type="text" th:field="*{color}">
+                <div class="error" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="bodyType">Body Type:</label>
+                <select id="bodyType" th:field="*{bodyType}">
+                    <option value="" disabled selected>-- Select Body Type --</option>
+                    <option th:each="b : ${body}" th:value="${b}" th:text="${b}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="engineType">Engine Type:</label>
+                <select id="engineType" th:field="*{engineType}">
+                    <option value="" disabled selected>-- Select Engine Type --</option>
+                    <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transmission">Transmission:</label>
+                <select id="transmission" th:field="*{transmission}">
+                    <option value="" disabled selected>-- Select Transmission --</option>
+                    <option th:each="s : ${sizes}" th:value="${s}" th:text="${s}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Car</button>
+            <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

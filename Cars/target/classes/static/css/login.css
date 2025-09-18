@@ -1,0 +1,98 @@
+/* General reset & body styling */
+body {
+    background-color: #f8f9fa; /* light gray */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-weight: 600;
+    color: #0d6efd; /* Bootstrap primary blue */
+}
+
+/* Card styling (used for login/register forms) */
+.card {
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    background-color: #ffffff;
+}
+
+/* Form labels */
+.form-label {
+    font-weight: 500;
+    color: #444;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+.btn-outline-danger {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Table styling */
+.table th {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Auth pages (login/register) */
+.auth-container {
+    max-width: 400px;
+    margin: 5% auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Links */
+a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Messages */
+.text-danger, .error {
+    color: #dc3545;
+    font-size: 0.9rem;
+}
+
+.text-success, .logout {
+    color: #198754;
+    font-size: 0.9rem;
+}
